@@ -25,8 +25,12 @@ public class Urlaubsantrag {
         return genehmigt;
     }
 
-    public void setGenehmigt(boolean genehmigt) {
-        this.genehmigt = genehmigt;
+    public void genehmigen() {
+        this.genehmigt = true;
+    }
+
+    public void ablehnen() {
+        this.genehmigt = false;
     }
 
     public Date getUrlaubsende() {
@@ -65,14 +69,34 @@ public class Urlaubsantrag {
         return ID;
     }
 
-    public Urlaubsantrag(Mitarbeiter vertreter, Mitarbeiter MA, Date urlaubsbeginn, Date urlaubsende, boolean genehmigt) {
-        this.vertreter = vertreter;
-        this.MA = MA;
-        this.urlaubsbeginn = urlaubsbeginn;
-        this.urlaubsende = urlaubsende;
-        this.genehmigt = genehmigt;
-        this.ID = Urlaubsantrag.IDCOUNTER;
-        Urlaubsantrag.IDCOUNTER++;
+    @Override
+    public String toString() {
+        return "Urlaubsantrag { " + "ID = " + ID + ", MA = " + MA + ", urlaubsbeginn = " + urlaubsbeginn + ", urlaubsende = " + urlaubsende + '}';
     }
 
+    public Urlaubsantrag(Mitarbeiter vertreter, Mitarbeiter MA, Date urlaubsbeginn, Date urlaubsende) {
+        this.vertreter = vertreter;
+        this.MA = MA;
+        if (MA == null) {
+            throw new IllegalArgumentException("Bitte geben Sie einen Mitarbeiter für den Urlaubsantrag ein!");
+        }
+        if (vertreter != null && vertreter.equals(MA)) {
+            throw new IllegalArgumentException("Ein Mitarbeiter kann sich nicht selbst vertreten!");
+        } else {
+            this.genehmigt = true;
+        }
+
+        this.urlaubsbeginn = urlaubsbeginn;
+        this.urlaubsende = urlaubsende;
+        if (urlaubsbeginn == null || urlaubsende == null) {
+            throw new IllegalArgumentException("Bitte geben Sie ein Start- und Enddatum für den Urlaubsantrag ein!");
+        }
+        this.ID = Urlaubsantrag.IDCOUNTER;
+        Urlaubsantrag.IDCOUNTER++;
+
+        if (vertreter == null) {
+            //Genehmigung erforderlich
+            //Constructor schließen, Eingabeaufforderung triggern, evlt aus Comm klasse
+        }
+    }
 }

@@ -46,6 +46,11 @@ public class Mitarbeiter {
         this.Name = Name;
     }
 
+    @Override
+    public String toString() {
+        return "Mitarbeiter { " + "Name = " + Name + ", ID = " + ID + ", urlaubstage = " + urlaubstage + '}';
+    }
+
     public Mitarbeiter(String Name, Abteilung abteilung, int urlaubstage) {
         this.Name = Name;
         this.ID = Mitarbeiter.IDCOUNTER;

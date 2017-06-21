@@ -19,6 +19,7 @@ public class Urlaubsvertretung {
         Mitarbeiter leiter = new Mitarbeiter("Peter", 10);
         Abteilung a = new Abteilung(leiter, "Neue Abteilung");
         Abteilung a2 = new Abteilung("zweite Abteilung");
+        Urlaubsantrag u = new Urlaubsantrag(leiter, leiter, null, null);
         System.out.println(a.getID() + " " + a2.getID());
     }
 
