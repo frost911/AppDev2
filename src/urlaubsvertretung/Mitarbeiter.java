@@ -15,6 +15,7 @@ public class Mitarbeiter {
     private static int IDCOUNTER = 0;
     private final int ID;
     private Abteilung abteilung;
+    private int urlaubstage;
 
     public Abteilung getAbteilung() {
         return abteilung;
@@ -27,9 +28,7 @@ public class Mitarbeiter {
     public int getID() {
         return ID;
     }
-
-    private int urlaubstage;
-
+    
     public int getUrlaubstage() {
         return urlaubstage;
     }
