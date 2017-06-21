@@ -5,6 +5,8 @@
  */
 package urlaubsvertretung;
 
+import java.util.Date;
+
 /**
  *
  * @author TKulhavy
@@ -19,8 +21,9 @@ public class Urlaubsvertretung {
         Mitarbeiter leiter = new Mitarbeiter("Peter", 10);
         Abteilung a = new Abteilung(leiter, "Neue Abteilung");
         Abteilung a2 = new Abteilung("zweite Abteilung");
-        Urlaubsantrag u = new Urlaubsantrag(leiter, leiter, null, null);
-        System.out.println(a.getID() + " " + a2.getID());
+        Mitarbeiter ma = new Mitarbeiter("Tom", a2, 10);
+        Urlaubsantrag u = new Urlaubsantrag(ma, leiter, new Date(2017, 6, 1), new Date(2017, 6, 8));
+        System.out.println(ma.getUrlaubstage());
     }
 
 }

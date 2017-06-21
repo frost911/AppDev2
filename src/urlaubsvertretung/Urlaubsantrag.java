@@ -6,6 +6,7 @@
 package urlaubsvertretung;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -74,7 +75,7 @@ public class Urlaubsantrag {
         return "Urlaubsantrag { " + "ID = " + ID + ", MA = " + MA + ", urlaubsbeginn = " + urlaubsbeginn + ", urlaubsende = " + urlaubsende + '}';
     }
 
-    public Urlaubsantrag(Mitarbeiter vertreter, Mitarbeiter MA, Date urlaubsbeginn, Date urlaubsende) {
+    public Urlaubsantrag(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) {
         this.vertreter = vertreter;
         this.MA = MA;
         if (MA == null) {
@@ -84,6 +85,9 @@ public class Urlaubsantrag {
             throw new IllegalArgumentException("Ein Mitarbeiter kann sich nicht selbst vertreten!");
         } else {
             this.genehmigt = true;
+            long diff = urlaubsende.getTime() - urlaubsbeginn.getTime();
+            int diffInDays = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            MA.setUrlaubstage(MA.getUrlaubstage() - diffInDays);
         }
 
         this.urlaubsbeginn = urlaubsbeginn;
