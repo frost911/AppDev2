@@ -33,20 +33,24 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     @Override
     public void urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException {
         Urlaubsantrag ua = db.readUA(ID);
+        String ret;
         if (genehmigt) {
             ua.genehmigen();
+            ret = "genehmigt";
             db.updateMA(ua.getMA().getID(), ua.getMA().getUrlaubstage());
         } else {
             ua.ablehnen();
+            ret = "abgelehnt";
         }
         db.updateUA(ID, genehmigt);
+        System.out.println(ua.toString() + " wurde " + ret + ".");
     }
 
     @Override
     public void urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException {
-        Urlaubsantrag antrag = new Urlaubsantrag(MA, vertreter, urlaubsbeginn, urlaubsende, 0);
-        db.saveUA(antrag);
-        System.out.println("Antrag " + antrag.toString() + " wurde gestellt.");
+        Urlaubsantrag ua = new Urlaubsantrag(MA, vertreter, urlaubsbeginn, urlaubsende, 0);
+        db.saveUA(ua);
+        System.out.println(ua.toString() + " wurde gestellt.");
     }
 
     public UVImpl() throws RemoteException {

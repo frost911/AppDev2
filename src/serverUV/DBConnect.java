@@ -158,7 +158,7 @@ public class DBConnect {
     public DBConnect() {
         try {
             conn = DriverManager.getConnection(url, user, pw);
-            System.out.println("Verbindung hergestellt.");
+            System.out.println("Verbindung erfolgreich hergestellt.");
         } catch (SQLException ex) {
             System.out.println("Fehler beim herstellen der Verbindung: " + ex.getMessage());
         }
