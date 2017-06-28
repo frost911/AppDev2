@@ -5,6 +5,8 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import serverUV.UV;
+import serverUV.Mitarbeiter;
+import serverUV.Abteilung;
 
 /**
  *
@@ -16,8 +18,13 @@ public class Client_main {
         try {
             UV uv = (UV) Naming.lookup("rmi://localhost:1099/urlaubsvertretung");
             String input = "";
-
-            uv.urlaubsantragEntscheiden(1, true);
+            
+            // Objekte erstellen    
+            Abteilung Anwendungsentwicklung = new Abteilung("Anwendungsentwicklung", 120);
+            Mitarbeiter thomas = new Mitarbeiter("Thomas Seitz",Anwendungsentwicklung, 30, 66 );
+            //todo.....
+            
+           // uv.urlaubsantragEntscheiden(1, true);
 
         } catch (RemoteException ex) {
             System.out.println("RMI Fehler: " + ex.getMessage());
