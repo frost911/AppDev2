@@ -1,53 +1,29 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package serverUV;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
- * Diese Klasse ist die Implementierung des Interfaces
- * BenutzerverwaltungInterface. Sie muss das Interface impelemntieren und mit
- * UnicastRemoteObject erweitert werden. Hier wird die ganze Logik des Programms
- * abgebildet. Es können zum Beispiel Benutzer erstellt werden, alle ausgelesen
- * oder alle gelöscht werden.
  *
- * @author Jan
+ * @author TKulhavy
  */
-public class UV extends UnicastRemoteObject implements UVInterface {
+public interface UV extends Remote {
 
-    DBConnect db;
+    public abstract void mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException;
 
-    @Override
-    public void urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException {
-        Urlaubsantrag antrag = new Urlaubsantrag(MA, vertreter, urlaubsbeginn, urlaubsende);
-        db.save(antrag);
-        System.out.println("Antrag " + antrag.toString() + " wurde gestellt.");
-    }
+    public abstract int urlaubstageLesen(int ID) throws RemoteException;
 
-    public Benutzerverwaltung() throws RemoteException, SQLException {
-        this.benutzer = new ArrayList<>();
-        this.db = new Datenbank(); // die Datenbank wird initiiert
-        benutzer.addAll(db.ladeBenutzer()); // alle Benutzer der Datenbank werden geladen und der lokalen
-        // Liste im Arbeitsspeicher (also der ArrayList benutzer) hinzugefügt
-    }
+    public abstract void urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
 
-    @Override
-    public String alleBenutzer() throws RemoteException {
-        String allebenutzer = "";
-        // alle Benutzer werden aus der lokalen liste ausgelesen und in einen String geschrieben und zurück gegeben
-        for (Benutzer b : benutzer) {
-            allebenutzer += b.name + "\n";
-        }
-        return allebenutzer;
-    }
+    public abstract Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException;
 
-    @Override
-    public void alleBenutzerLoeschen() throws RemoteException {
-        db.alleBenutzerLoeschen(); // alle benutzer werden in der Datenbank
-        benutzer.clear(); // und lokal gelöscht
-        System.out.println("Alle Benutzer wurden gelöscht");
-    }
+    public abstract Urlaubsantrag urlaubsantragLesen(int ID) throws RemoteException;
 
+    public abstract void urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException;
 }

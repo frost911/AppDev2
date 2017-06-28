@@ -1,11 +1,12 @@
 package serverUV;
 
-public class Abteilung {
+import java.io.Serializable;
+
+public class Abteilung implements Serializable {
 
     private final int ID;
     private Mitarbeiter abteilungsleiter;
     private String Name;
-    private static int IDCOUNTER = 0;
 
     public String getName() {
         return Name;
@@ -27,16 +28,14 @@ public class Abteilung {
         this.abteilungsleiter = abteilungsleiter;
     }
 
-    public Abteilung(Mitarbeiter abteilungsleiter, String Name) {
-        this.ID = Abteilung.IDCOUNTER;
-        Abteilung.IDCOUNTER++;
+    public Abteilung(Mitarbeiter abteilungsleiter, String Name, int ID) {
+        this.ID = ID;
         this.abteilungsleiter = abteilungsleiter;
         this.Name = Name;
     }
 
-    public Abteilung(String Name) {
-        this.ID = Abteilung.IDCOUNTER;
-        Abteilung.IDCOUNTER++;
+    public Abteilung(String Name, int ID) {
+        this.ID = ID;
         this.Name = Name;
     }
 }

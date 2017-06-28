@@ -1,13 +1,14 @@
 package serverUV;
 
+import java.io.Serializable;
+
 /**
  *
  * @author TKulhavy
  */
-public class Mitarbeiter {
+public class Mitarbeiter implements Serializable {
 
     private String Name;
-    private static int IDCOUNTER = 0;
     private final int ID;
     private Abteilung abteilung;
     private int urlaubstage;
@@ -45,19 +46,10 @@ public class Mitarbeiter {
         return "Mitarbeiter { " + "Name = " + Name + ", ID = " + ID + ", urlaubstage = " + urlaubstage + '}';
     }
 
-    public Mitarbeiter(String Name, Abteilung abteilung, int urlaubstage) {
+    public Mitarbeiter(String Name, Abteilung abteilung, int urlaubstage, int ID) {
         this.Name = Name;
-        this.ID = Mitarbeiter.IDCOUNTER;
-        Mitarbeiter.IDCOUNTER++;
         this.abteilung = abteilung;
         this.urlaubstage = urlaubstage;
+        this.ID = ID;
     }
-
-    public Mitarbeiter(String Name, int urlaubstage) {
-        this.Name = Name;
-        this.ID = Mitarbeiter.IDCOUNTER;
-        Mitarbeiter.IDCOUNTER++;
-        this.urlaubstage = urlaubstage;
-    }
-
 }

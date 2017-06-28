@@ -5,9 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import serverUV.UVInterface;
+import serverUV.UV;
 
 /**
  *
@@ -19,22 +17,10 @@ public class Client_main {
         try {
             Scanner scanner = new Scanner(System.in);
             //connect
-            UVInterface uv = (UVInterface) Naming.lookup("rmi://localhost:1099/benutzerverwaltung");
+            UV uv = (UV) Naming.lookup("rmi://localhost:1099/urlaubsvertretung");
             String input = "";
-
-            while (true) {
-                System.out.println("Benutzername oder 'exit' oder 'liste' oder 'clear' eingeben:");
-                input = scanner.next();
-                if (input.equals("exit")) {
-                    break;
-                } else if (input.equals("liste")) {
-                    System.out.println("Alle Benutzer die angelegt wurden:");
-                    System.out.println("------------------------------------");
-                    System.out.println(uv.getAllUA());
-                } else {
-                    uv.urlaubsantragStellen(); // wie? Import für MA macht keinen sinn
-                }
-            }
+            //Objekte anlegen
+            uv.urlaubsantragEntscheiden(1, true);
         } catch (NotBoundException ex) {
             System.out.println("Fehler: " + ex.getMessage());
         } catch (MalformedURLException ex) {
