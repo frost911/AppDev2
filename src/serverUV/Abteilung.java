@@ -33,9 +33,14 @@ public class Abteilung implements Serializable {
         this.abteilungsleiter = abteilungsleiter;
         this.Name = Name;
     }
-
-    public Abteilung(String Name, int ID) {
-        this.ID = ID;
+    
+    public Abteilung(String Name, int id) {
         this.Name = Name;
+        this.ID = id;
+    }
+
+    public Abteilung(String Name) {
+        this.Name = Name;
+        this.ID = 0;
     }
 }

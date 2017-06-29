@@ -5,8 +5,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import serverUV.UV;
-import serverUV.Mitarbeiter;
-import serverUV.Abteilung;
 
 /**
  *
@@ -19,11 +17,20 @@ public class Client_main {
             UV uv = (UV) Naming.lookup("rmi://localhost:1099/urlaubsvertretung");
             String input = "";
             
-            // Objekte erstellen    
-            Abteilung Anwendungsentwicklung = new Abteilung("Anwendungsentwicklung", 120);
-            Mitarbeiter thomas = new Mitarbeiter("Thomas Seitz",Anwendungsentwicklung, 30, 66 );
-            //todo.....
+            // Objekte erstellen
             
+            uv.abteilungAnlegen("Anwendungsentwicklung");
+            
+            uv.mitarbeiterAnlegen("Thomas Seitz","Anwendungsentwicklung", 30);
+            uv.mitarbeiterAnlegen("Maurice Wisskirchen","Anwendungsentwicklung", 30);
+            uv.mitarbeiterAnlegen("Patrick Lemm","Anwendungsentwicklung", 30);
+            uv.mitarbeiterAnlegen("Tim Kulhavy","Anwendungsentwicklung", 30);
+            
+            uv.setAbteilungsleiter(uv.abteilungLesen("Anwendungsentwicklung").getID(),uv.mitarbeiterLesen("Tim Kulhavy").getID());
+            
+            
+
+            //todo..... 
            // uv.urlaubsantragEntscheiden(1, true);
 
         } catch (RemoteException ex) {

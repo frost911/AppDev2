@@ -14,6 +14,41 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         db.saveMA(MA);
         System.out.println("Mitarbeiter " + MA.toString() + " wurde angelegt.");
     }
+    
+    @Override
+    public void mitarbeiterAnlegen(String Name, String Abteilung, int urlaubstage) throws RemoteException {
+        Mitarbeiter MA = new Mitarbeiter(Name,Abteilung,urlaubstage);
+        db.saveMA(MA);
+        System.out.println("Mitarbeiter " + MA.toString() + " wurde angelegt.");
+    }
+    
+    @Override
+    public Abteilung abteilungLesen(String Name) {
+        Abteilung AB = new Abteilung(Name);
+        db.readDpt(Name);
+        System.out.println("Abteilung " + AB.toString() + " wurde ausgelesen.");
+        return AB;
+    }
+    
+    @Override
+    public  void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) {
+        Abteilung AB = new Abteilung(abteilungsleiter, Name, ID);
+        db.saveAB(AB);
+        System.out.println("Abteilung " + AB.toString() + " wurde angelegt.");
+    }
+    
+    @Override
+    public  void abteilungAnlegen(String Name) {
+        Abteilung AB = new Abteilung(Name);
+        db.saveAB(AB);
+        System.out.println("Abteilung " + AB.toString() + " wurde angelegt.");
+    }
+    
+    @Override
+    public void setAbteilungsleiter (int AB_ID, int MA_ID){
+        db.setAL(AB_ID, MA_ID);
+        System.out.println("Abteilungsleiter wurde zugewiesen.");
+    }
 
     @Override
     public int urlaubstageLesen(int ID) throws RemoteException {
@@ -23,8 +58,13 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     @Override
     public Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException {
         return db.readMA(ID);
-    }
-
+    } 
+    
+    @Override
+    public Mitarbeiter mitarbeiterLesen(String name) throws RemoteException {
+        return db.readMA(name);
+    } 
+    
     @Override
     public Urlaubsantrag urlaubsantragLesen(int ID) throws RemoteException {
         return db.readUA(ID);

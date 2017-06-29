@@ -78,6 +78,23 @@ public class DBConnect {
         }
         return ma;
     }
+    
+    public Mitarbeiter readMA(String name) {
+        Mitarbeiter ma = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `mitarbeiter` WHERE `name` = ?");
+            ps.setString(1, name);
+            ps.execute();
+            ResultSet res = ps.getResultSet();
+            if (res.next()) {
+                ma = new Mitarbeiter(res.getString("Name"), this.readDpt(res.getInt("abteilungs_id")), res.getInt("Urlaubstage"), res.getInt("id"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Fehler beim lesen des Mitarbeiters" + name + ex.getMessage());
+        }
+        return ma;
+    }
 
     public Urlaubsantrag readUA(int ID) {
         Urlaubsantrag ua = null;
@@ -100,6 +117,24 @@ public class DBConnect {
         return ua;
     }
 
+    public Abteilung readDpt(String abteilungsname) {
+        Abteilung dpt = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `abteilung` WHERE `name` = ?");
+            ps.setString(1, abteilungsname);
+            ps.execute();
+            ResultSet res = ps.getResultSet();
+            if (res.next()) {
+                dpt = new Abteilung(res.getString("name"),res.getInt("id"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Fehler beim lesen einer der Abteilung: " + abteilungsname  + ex.getMessage());
+        }
+        return dpt;
+    }
+    
+    
     public Abteilung readDpt(int ID) {
         Abteilung dpt = null;
         try {
@@ -108,7 +143,7 @@ public class DBConnect {
             ps.execute();
             ResultSet res = ps.getResultSet();
             if (res.next()) {
-                dpt = new Abteilung(res.getString("name"), res.getInt("id"));
+                dpt = new Abteilung(res.getString("name"));
             }
             ps.close();
         } catch (SQLException ex) {
@@ -135,15 +170,53 @@ public class DBConnect {
     }
 
     public void saveMA(Mitarbeiter ma) {
-        try {
+        try {  
             PreparedStatement ps = conn.prepareStatement("INSERT INTO `mitarbeiter` (`id`,`abteilungs_id`,`name`,`urlaubstage`) VALUES (NULL, ?, ?, ?)");
-            ps.setInt(1, ma.getAbteilung().getID());
+            if(ma.getAbteilung() != null){ 
+                ps.setInt(1, ma.getAbteilung().getID());
+            }
+            else{              
+                String abteilungsname = ma.getAbteilungStr();
+                Abteilung abteilung = this.readDpt(abteilungsname);
+                ps.setInt(1,abteilung.getID());
+           }
             ps.setString(2, ma.getName());
             ps.setInt(3, ma.getUrlaubstage());
             ps.execute();
-            ps.close();
+            ps.close(); 
+            
         } catch (SQLException ex) {
             System.out.println("Fehler beim anlegen eines Mitarbeiters: (ID " + ma.toString() + "): " + ex.getMessage());
+        }
+    }
+    
+    public void setAL(int MA_ID, int AB_ID){
+        try {
+            PreparedStatement ps = conn.prepareStatement(("UPDATE `abteilung` SET `abteilungsleiter` = ? WHERE `abteilung`.`id` = ?"));
+            ps.setInt(1, MA_ID);
+            ps.setInt(2, AB_ID);
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Fehler beim setzen des Abteilungsleiters");
+        }
+    }
+    
+    
+    public void saveAB(Abteilung ab) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO `abteilung` (`id`,`name`,`abteilungsleiter`) VALUES (NULL, ?, ?)");
+            ps.setString(1, ab.getName());
+            if(ab.getAbteilungsleiter() != null && !ab.getAbteilungsleiter().getName().isEmpty()){ 
+                ps.setInt(2, ab.getAbteilungsleiter().getID());
+            }
+            else {
+                ps.setInt(2, 0);
+            }
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Fehler beim anlegen einer Abteilung: (ID " + ab.toString() + "): " + ex.getMessage());
         }
     }
 

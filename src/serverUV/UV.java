@@ -15,13 +15,25 @@ import java.sql.Date;
  */
 public interface UV extends Remote {
 
+    public abstract void mitarbeiterAnlegen(String Name, String Abteilung, int urlaubstage) throws RemoteException;
+    
     public abstract void mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException;
-
+    
+    public abstract void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) throws RemoteException;
+    
+    public abstract void abteilungAnlegen(String Name) throws RemoteException;
+    
     public abstract int urlaubstageLesen(int ID) throws RemoteException;
 
     public abstract void urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
+    
+    public abstract void setAbteilungsleiter (int Ab_ID, int MA_ID) throws RemoteException;
 
     public abstract Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException;
+    
+    public abstract Mitarbeiter mitarbeiterLesen(String name) throws RemoteException;
+    
+    public abstract Abteilung abteilungLesen(String Name) throws RemoteException;
 
     public abstract Urlaubsantrag urlaubsantragLesen(int ID) throws RemoteException;
 
