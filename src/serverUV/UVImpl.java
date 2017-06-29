@@ -3,6 +3,7 @@ package serverUV;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class UVImpl extends UnicastRemoteObject implements UV {
 
@@ -14,40 +15,31 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         db.saveMA(MA);
         System.out.println("Mitarbeiter " + MA.toString() + " wurde angelegt.");
     }
-    
-    @Override
-    public void mitarbeiterAnlegen(String Name, String Abteilung, int urlaubstage) throws RemoteException {
-        Mitarbeiter MA = new Mitarbeiter(Name,Abteilung,urlaubstage);
-        db.saveMA(MA);
-        System.out.println("Mitarbeiter " + MA.toString() + " wurde angelegt.");
-    }
-    
+
     @Override
     public Abteilung abteilungLesen(String Name) {
-        Abteilung AB = new Abteilung(Name);
-        db.readDpt(Name);
-        System.out.println("Abteilung " + AB.toString() + " wurde ausgelesen.");
-        return AB;
+        return db.readDpt(Name);
+
     }
-    
+
     @Override
-    public  void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) {
+    public void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) {
         Abteilung AB = new Abteilung(abteilungsleiter, Name, ID);
-        db.saveAB(AB);
+        db.saveDpt(AB);
         System.out.println("Abteilung " + AB.toString() + " wurde angelegt.");
     }
-    
+
     @Override
-    public  void abteilungAnlegen(String Name) {
+    public void abteilungAnlegen(String Name) {
         Abteilung AB = new Abteilung(Name);
-        db.saveAB(AB);
+        db.saveDpt(AB);
         System.out.println("Abteilung " + AB.toString() + " wurde angelegt.");
     }
-    
+
     @Override
-    public void setAbteilungsleiter (int AB_ID, int MA_ID){
+    public void setAbteilungsleiter(int AB_ID, int MA_ID) {
         db.setAL(AB_ID, MA_ID);
-        System.out.println("Abteilungsleiter wurde zugewiesen.");
+        System.out.println("Abteilungsleiter " + MA_ID + " wurde der Abteilung " + AB_ID + " zugewiesen.");
     }
 
     @Override
@@ -58,16 +50,21 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     @Override
     public Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException {
         return db.readMA(ID);
-    } 
-    
+    }
+
     @Override
     public Mitarbeiter mitarbeiterLesen(String name) throws RemoteException {
         return db.readMA(name);
-    } 
-    
+    }
+
     @Override
     public Urlaubsantrag urlaubsantragLesen(int ID) throws RemoteException {
         return db.readUA(ID);
+    }
+
+    @Override
+    public ArrayList<Urlaubsantrag> readAllUAsForMA(int MA_ID) throws RemoteException {
+        return db.readAllUAsForMA(MA_ID);
     }
 
     @Override

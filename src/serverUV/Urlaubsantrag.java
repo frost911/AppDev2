@@ -1,5 +1,6 @@
 package serverUV;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -7,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author TKulhavy
  */
-public class Urlaubsantrag {
+public class Urlaubsantrag implements Serializable {
 
     private final int ID;
     private Mitarbeiter vertreter;

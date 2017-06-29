@@ -28,12 +28,17 @@ public class Abteilung implements Serializable {
         this.abteilungsleiter = abteilungsleiter;
     }
 
+    @Override
+    public String toString() {
+        return "Abteilung {" + " ID= " + ID + ", abteilungsleiter = " + abteilungsleiter + ", Name = " + Name + '}';
+    }
+
     public Abteilung(Mitarbeiter abteilungsleiter, String Name, int ID) {
         this.ID = ID;
         this.abteilungsleiter = abteilungsleiter;
         this.Name = Name;
     }
-    
+
     public Abteilung(String Name, int id) {
         this.Name = Name;
         this.ID = id;
