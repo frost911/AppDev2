@@ -10,10 +10,12 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     DBConnect db;
 
     @Override
-    public void mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException {
+    public String mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException {
         Mitarbeiter MA = new Mitarbeiter(Name, abteilung, urlaubstage, 0);
         db.saveMA(MA);
-        System.out.println("Mitarbeiter " + MA.toString() + " wurde angelegt.");
+        Mitarbeiter MAnew = this.mitarbeiterLesen(MA.getName());
+        String output =  MAnew.toString() + " wurde angelegt.";
+        return output;
     }
 
     @Override
@@ -30,16 +32,18 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
 
     @Override
-    public void abteilungAnlegen(String Name) {
+    public String abteilungAnlegen(String Name) {
         Abteilung AB = new Abteilung(Name);
         db.saveDpt(AB);
-        System.out.println("Abteilung " + AB.toString() + " wurde angelegt.");
+        String output = abteilungLesen(Name).toString() + " wurde angelegt.";
+        return output;
     }
 
     @Override
-    public void setAbteilungsleiter(int AB_ID, int MA_ID) {
+    public String setAbteilungsleiter(int AB_ID, int MA_ID) {
         db.setAL(AB_ID, MA_ID);
-        System.out.println("Abteilungsleiter " + MA_ID + " wurde der Abteilung " + AB_ID + " zugewiesen.");
+        String output = "Abteilungsleiter " + MA_ID + " wurde der Abteilung " + AB_ID + " zugewiesen.";
+        return output;    
     }
 
     @Override
@@ -82,12 +86,19 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         db.updateUA(ID, genehmigt);
         System.out.println(ua.toString() + " wurde " + ret + ".");
     }
-
+    
+   /* @Override
+    public ArrayList gibInput(String input, int ID) throws RemoteException {
+        ArrayList arr = new ArrayList();
+        return arr;
+    } */
+    
     @Override
-    public void urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException {
+    public String urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException {
         Urlaubsantrag ua = new Urlaubsantrag(MA, vertreter, urlaubsbeginn, urlaubsende, 0);
         db.saveUA(ua);
-        System.out.println(ua.toString() + " wurde gestellt.");
+        String output = ua.toString() + " wurde gestellt.";
+        return output;
     }
 
     public UVImpl() throws RemoteException {

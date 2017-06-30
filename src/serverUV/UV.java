@@ -16,17 +16,19 @@ import java.util.ArrayList;
  */
 public interface UV extends Remote {
 
-    public abstract void mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException;
+    public abstract String mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException;
 
     public abstract void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) throws RemoteException;
 
-    public abstract void abteilungAnlegen(String Name) throws RemoteException;
+    public abstract String abteilungAnlegen(String Name) throws RemoteException;
 
     public abstract int urlaubstageLesen(int ID) throws RemoteException;
+    
+    //public abstract ArrayList gibInput(String input, int ID) throws RemoteException;
 
     public abstract void urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
 
-    public abstract void setAbteilungsleiter(int AB_ID, int MA_ID) throws RemoteException;
+    public abstract String setAbteilungsleiter(int AB_ID, int MA_ID) throws RemoteException;
 
     public abstract Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException;
 
@@ -38,5 +40,5 @@ public interface UV extends Remote {
 
     public abstract ArrayList<Urlaubsantrag> readAllUAsForMA(int MA_ID) throws RemoteException;
 
-    public abstract void urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException;
+    public abstract String urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException;
 }

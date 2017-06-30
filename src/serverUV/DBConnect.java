@@ -148,7 +148,13 @@ public class DBConnect {
             ps.execute();
             ResultSet res = ps.getResultSet();
             if (res.next()) {
-                dpt = new Abteilung(res.getString("name"), res.getInt("id"));
+                if (res.getInt("abteilungsleiter") == 0){
+                    dpt = new Abteilung(res.getString("name"), res.getInt("ID"));   
+                }
+                else{
+                    Mitarbeiter ma = this.readMA(res.getInt("abteilungsleiter"));
+                    dpt = new Abteilung(ma, res.getString("name"), res.getInt("ID"));              
+                }
             }
             ps.close();
         } catch (SQLException ex) {
@@ -164,8 +170,8 @@ public class DBConnect {
             ps.setInt(1, ID);
             ps.execute();
             ResultSet res = ps.getResultSet();
-            if (res.next()) {
-                dpt = new Abteilung(res.getString("name"), res.getInt("ID"));
+            if (res.next()) {               
+                    dpt = new Abteilung(res.getString("name"), res.getInt("ID"));   
             }
             ps.close();
         } catch (SQLException ex) {
