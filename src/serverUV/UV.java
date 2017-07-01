@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author TKulhavy
+ * @author TKulhavy,
  */
 public interface UV extends Remote {
 
@@ -23,8 +23,6 @@ public interface UV extends Remote {
     public abstract String abteilungAnlegen(String Name) throws RemoteException;
 
     public abstract int urlaubstageLesen(int ID) throws RemoteException;
-    
-    //public abstract String gibInput(String input, Urlaubsantrag UA) throws RemoteException;
 
     public abstract String urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
 

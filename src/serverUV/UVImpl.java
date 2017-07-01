@@ -21,7 +21,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     @Override
     public Abteilung abteilungLesen(String Name) {
         return db.readDpt(Name);
-
     }
 
     @Override
@@ -76,35 +75,31 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         Urlaubsantrag ua = db.readUA(ID);
         String ret;
         if (genehmigt) {
-            ua.genehmigen();
+            ua.genehmigen(); // sets genehmigt = true;
             ret = "genehmigt";
             db.updateMA(ua.getMA().getID(), ua.getMA().getUrlaubstage());
         } else {
-            ua.ablehnen();
+            ua.ablehnen(); // sets genehmigt = false;
             ret = "abgelehnt";
         }
         db.updateUA(ID, genehmigt);
        return ua.toString() + " wurde " + ret + ".";
     }
     
-   /* @Override
-    public String urlaubsantragEntscheidenInp(String input, Urlaubsantrag UA) throws RemoteException {
-        
-    
-    } */
-    
     @Override
     public String urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException {
         Urlaubsantrag ua = new Urlaubsantrag(MA, vertreter, urlaubsbeginn, urlaubsende, 0);
         db.saveUA(ua);
+        db.updateMA(MA.getID(),MA.getUrlaubstage());
+        String output = "";
         ArrayList<Urlaubsantrag> UAs = db.readAllUAsForMA(MA.getID());
         
-        //todo auf vertreter Prüfen... wenn es einen gibt...
-        
-        String output = UAs.get(0).toString() + " wurde gestellt.";
-        
-        // todo sonst: 
-        //"Urlaubsantrag muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen."
+        if(UAs.get(0).getVertreter() != null){
+            output = UAs.get(0).toString() + " wurde gestellt und angenommen.";   
+        }
+        else{
+            output = UAs.get(0).toString() + " muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen.";
+        }
         return output;
     }
 

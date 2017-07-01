@@ -43,7 +43,7 @@ public class Mitarbeiter implements Serializable {
 
     @Override
     public String toString() {
-        return "Mitarbeiter { " + "Name = " + Name + ", ID = " + ID + ", urlaubstage = " + urlaubstage + '}';
+        return "Mitarbeiter { " + "Name = " + Name + ", ID = " + ID + ", Urlaubstage = " + urlaubstage + '}';
     }
 
     public Mitarbeiter(String Name, Abteilung abteilung, int urlaubstage, int ID) {
