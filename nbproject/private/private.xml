@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/Abteilung.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/UV.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/UVImpl.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/Mitarbeiter.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/Server_main.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/clientUV/Client_main.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/DBConnect.java</file>
-            <file>file:/Users/thomasseitz/NetBeansProjects/Urlaubsmanagement/src/serverUV/Urlaubsantrag.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/serverUV/Abteilung.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/serverUV/UVImpl.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/serverUV/Urlaubsantrag.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/clientUV/Client_main.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/serverUV/DBConnect.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/serverUV/Mitarbeiter.java</file>
+            <file>file:/C:/Users/seitz/Documents/NetBeansProjects/Urlaubsvertretung/src/serverUV/Server_main.java</file>
         </group>
     </open-files>
 </project-private>

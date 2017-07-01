@@ -24,9 +24,9 @@ public interface UV extends Remote {
 
     public abstract int urlaubstageLesen(int ID) throws RemoteException;
     
-    //public abstract ArrayList gibInput(String input, int ID) throws RemoteException;
+    //public abstract String gibInput(String input, Urlaubsantrag UA) throws RemoteException;
 
-    public abstract void urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
+    public abstract String urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
 
     public abstract String setAbteilungsleiter(int AB_ID, int MA_ID) throws RemoteException;
 

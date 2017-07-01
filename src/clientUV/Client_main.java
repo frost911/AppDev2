@@ -33,6 +33,7 @@ public class Client_main {
     public static void main(String[] args) throws IOException { 
         try {
             UV uv = (UV) Naming.lookup("rmi://localhost:1099/urlaubsvertretung");
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String input = "";
 
             // Ausgabe "Header"
@@ -49,52 +50,48 @@ public class Client_main {
             System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Thomas Seitz", uv.abteilungLesen("Anwendungsentwicklung"), 30));
             System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Maurice Wisskirchen", uv.abteilungLesen("Anwendungsentwicklung"), 30));
             System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Patrick Lemm", uv.abteilungLesen("Anwendungsentwicklung"), 30));
-            System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Tim Gaylord Kulhavy", uv.abteilungLesen("Anwendungsentwicklung"), 30));
-            //System.out.println(ANSI_GREEN + uv.setAbteilungsleiter(uv.abteilungLesen("Anwendungsentwicklung").getID(), uv.mitarbeiterLesen("Tim Kulhavy").getID()));
+            System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Tim Kulhavy", uv.abteilungLesen("Anwendungsentwicklung"), 30));
+            System.out.println(ANSI_GREEN + uv.setAbteilungsleiter(uv.abteilungLesen("Anwendungsentwicklung").getID(),uv.mitarbeiterLesen("Tim Kulhavy").getID()));          
             System.out.println(ANSI_GREEN + uv.abteilungLesen("Anwendungsentwicklung"));    
             System.out.println(ANSI_GREEN + "Mitarbeiter Seitz hat " + uv.urlaubstageLesen(uv.mitarbeiterLesen("Thomas Seitz").getID()) + " Urlaubstage");
             System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Thomas Seitz"), null, new Date(117, 7, 2), new Date(117, 7, 10)));
             ArrayList<Urlaubsantrag> UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Thomas Seitz").getID());
-            
-            
+               
             //ggf auslagern
-            System.out.println(ANSI_GREEN + "Urlaubsantrag muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen");
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println(ANSI_GREEN + "Urlaubsantrag muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen.");
             System.out.print(ANSI_RED + "Ihre Eingabe:");
             input = br.readLine();
-            if(input == "J"){
-                uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
-                System.out.println(ANSI_RED + "Antrag wurde angenommen.");
+            if(input == "J" && input == "j" ){
+                System.out.println(uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                //System.out.println(ANSI_RED + "Antrag wurde angenommen.");
             }
             else{
-                uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
-                System.out.println(ANSI_RED + "Antrag wurde abgelehnt.");
+                System.out.println(uv.urlaubsantragEntscheiden(UAs.get(0).getID(), false)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                //System.out.println(ANSI_RED + "Antrag wurde abgelehnt.");
             }
 
-            System.out.println(ANSI_GREEN + "Mitarbeiter Seitz hat noch" +uv.mitarbeiterLesen("Thomas Seitz").getUrlaubstage() + " Urlaubstage");
+            System.out.println(ANSI_GREEN + "Mitarbeiter Seitz hat noch " +uv.mitarbeiterLesen("Thomas Seitz").getUrlaubstage() + " Urlaubstage");
             System.out.println(ANSI_GREEN + "Mitarbeiter Lemm will ebenfalls Urlaub nehmen.");
-            System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Patrick Lemm"), uv.mitarbeiterLesen("Thomas Seitz"), new Date(117, 7, 2), new Date(117, 7, 10)));
+            System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Patrick Lemm"), null, new Date(117, 7, 2), new Date(117, 7, 10)));
             UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Patrick Lemm").getID());
             
             //ggf auslagern
-            System.out.println(ANSI_GREEN + "Urlaubsantrag muss entschieden werden, Vertreter ist in Urlaub. Angrag mit J annnehmen oder mit N ablehnen");
-            br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println(ANSI_GREEN + "Urlaubsantrag muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen.");
             System.out.print(ANSI_RED + "Ihre Eingabe:");
             input = br.readLine();
-            if(input == "J"){
-                uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
-                System.out.println(ANSI_RED + "Antrag wurde angenommen.");
+            if(input == "J" && input == "j" ){
+                System.out.println(uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                //System.out.println(ANSI_RED + "Antrag wurde angenommen.");
             }
             else{
-                uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
-                System.out.println(ANSI_RED + "Antrag wurde abgelehnt.");
+                System.out.println(uv.urlaubsantragEntscheiden(UAs.get(0).getID(), false)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                //System.out.println(ANSI_RED + "Antrag wurde abgelehnt.");
             }
             
             System.out.println(ANSI_GREEN + "Da der Urlaub abgelehnt wurde, stellt Mitarbeiter Lemm einen erneuten Antrag.");
             System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Patrick Lemm"), uv.mitarbeiterLesen("Maurice Wisskirchen"), new Date(117, 7, 2), new Date(117, 7, 10)));
             
-            
-            
+            //exception handling
         } catch (RemoteException ex) {
             System.out.println("RMI Fehler: " + ex.getMessage());
         } catch (MalformedURLException ex) {

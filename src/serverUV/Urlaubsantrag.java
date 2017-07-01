@@ -65,7 +65,11 @@ public class Urlaubsantrag implements Serializable {
 
     @Override
     public String toString() {
-        return "Urlaubsantrag { " + "ID = " + ID + ", MA = " + MA + ", urlaubsbeginn = " + urlaubsbeginn + ", urlaubsende = " + urlaubsende + '}';
+        if(vertreter == null){
+            return "Urlaubsantrag { " + "ID = " + ID + ", Antragsteller = " + MA.toString() + ", Urlaubsbeginn = " + urlaubsbeginn + ", Urlaubsende = " + urlaubsende + '}';
+        }else{
+            return "Urlaubsantrag { " + "ID = " + ID + ", Antragsteller = " + MA.toString() + ", Vertreter = " + vertreter.toString() + ", Urlaubsbeginn = " + urlaubsbeginn + ", Urlaubsende = " + urlaubsende + '}';
+        }
     }
 
     public Urlaubsantrag(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende, int ID) {
@@ -87,7 +91,7 @@ public class Urlaubsantrag implements Serializable {
         }
         if (vertreter != null && vertreter.equals(MA)) {
             throw new IllegalArgumentException("Ein Mitarbeiter kann sich nicht selbst vertreten!");
-        } else if (vertreter != null) {
+        } else if (vertreter != null) { //todo
             this.genehmigt = true;
             MA.setUrlaubstage(MA.getUrlaubstage() - this.diffInDays);
         }

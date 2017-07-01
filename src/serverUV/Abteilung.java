@@ -30,7 +30,7 @@ public class Abteilung implements Serializable {
 
     @Override
     public String toString() {
-        return "Abteilung {" + " ID= " + ID + ", abteilungsleiter = " + abteilungsleiter + ", Name = " + Name + '}';
+        return "Abteilung {" + " ID = " + ID + ", Abteilungsleiter = " + abteilungsleiter + ", Name = " + Name + '}';
     }
 
     public Abteilung(Mitarbeiter abteilungsleiter, String Name, int ID) {

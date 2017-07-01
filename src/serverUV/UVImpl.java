@@ -72,7 +72,7 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
 
     @Override
-    public void urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException {
+    public String urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException {
         Urlaubsantrag ua = db.readUA(ID);
         String ret;
         if (genehmigt) {
@@ -84,20 +84,27 @@ public class UVImpl extends UnicastRemoteObject implements UV {
             ret = "abgelehnt";
         }
         db.updateUA(ID, genehmigt);
-        System.out.println(ua.toString() + " wurde " + ret + ".");
+       return ua.toString() + " wurde " + ret + ".";
     }
     
    /* @Override
-    public ArrayList gibInput(String input, int ID) throws RemoteException {
-        ArrayList arr = new ArrayList();
-        return arr;
+    public String urlaubsantragEntscheidenInp(String input, Urlaubsantrag UA) throws RemoteException {
+        
+    
     } */
     
     @Override
     public String urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException {
         Urlaubsantrag ua = new Urlaubsantrag(MA, vertreter, urlaubsbeginn, urlaubsende, 0);
         db.saveUA(ua);
-        String output = ua.toString() + " wurde gestellt.";
+        ArrayList<Urlaubsantrag> UAs = db.readAllUAsForMA(MA.getID());
+        
+        //todo auf vertreter Prüfen... wenn es einen gibt...
+        
+        String output = UAs.get(0).toString() + " wurde gestellt.";
+        
+        // todo sonst: 
+        //"Urlaubsantrag muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen."
         return output;
     }
 
