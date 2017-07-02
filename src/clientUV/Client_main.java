@@ -13,10 +13,6 @@ import java.io.InputStreamReader;
 import serverUV.UV;
 import serverUV.Urlaubsantrag;
 
-/**
- *
- * @author TKulhavy
- */
 public class Client_main {
       
     // Variablen für Farbige Textausgabe
