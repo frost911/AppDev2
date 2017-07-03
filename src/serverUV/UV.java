@@ -10,33 +10,35 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.ArrayList;
 
-/**
- *
- * @author TKulhavy,
- */
 public interface UV extends Remote {
-
+    
+    // Mitarbeiter
+    
     public abstract String mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException;
-
-    public abstract void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) throws RemoteException;
-
-    public abstract String abteilungAnlegen(String Name) throws RemoteException;
-
-    public abstract int urlaubstageLesen(int ID) throws RemoteException;
-
-    public abstract String urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
-
-    public abstract String setAbteilungsleiter(int AB_ID, int MA_ID) throws RemoteException;
-
+    
     public abstract Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException;
 
     public abstract Mitarbeiter mitarbeiterLesen(String name) throws RemoteException;
+    
+     public abstract int urlaubstageLesen(int ID) throws RemoteException;
+    
+    // Abteilung
+    
+    public abstract void abteilungAnlegen(Mitarbeiter abteilungsleiter, String Name, int ID) throws RemoteException;
+
+    public abstract String abteilungAnlegen(String Name) throws RemoteException;
+    
+    public abstract String setAbteilungsleiter(int AB_ID, int MA_ID) throws RemoteException;
 
     public abstract Abteilung abteilungLesen(String Name) throws RemoteException;
+    
+    // Urlaubsantrag
+
+    public abstract String urlaubsantragEntscheiden(int ID, boolean genehmigt) throws RemoteException;
 
     public abstract Urlaubsantrag urlaubsantragLesen(int ID) throws RemoteException;
 
-    public abstract ArrayList<Urlaubsantrag> readAllUAsForMA(int MA_ID) throws RemoteException;
+    public abstract ArrayList<Integer> readAllUAsForMA(int MA_ID) throws RemoteException;
 
     public abstract String urlaubsantragStellen(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende) throws RemoteException;
 }

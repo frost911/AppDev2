@@ -8,7 +8,10 @@ import java.util.ArrayList;
 public class UVImpl extends UnicastRemoteObject implements UV {
 
     DBConnect db;
-
+    
+    
+    // Mitarbeiter
+    
     @Override
     public String mitarbeiterAnlegen(String Name, Abteilung abteilung, int urlaubstage) throws RemoteException {
         Mitarbeiter MA = new Mitarbeiter(Name, abteilung, urlaubstage, 0);
@@ -18,6 +21,23 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         return output;
     }
 
+    @Override
+    public int urlaubstageLesen(int ID) throws RemoteException {
+        return db.readUrlaubstage(ID);
+    }
+
+    @Override
+    public Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException {
+        return db.readMA(ID);
+    }
+
+    @Override
+    public Mitarbeiter mitarbeiterLesen(String name) throws RemoteException {
+        return db.readMA(name);
+    }
+    
+    // Abteilung
+    
     @Override
     public Abteilung abteilungLesen(String Name) {
         return db.readDpt(Name);
@@ -44,21 +64,8 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         String output = "Abteilungsleiter " + MA_ID + " wurde der Abteilung " + AB_ID + " zugewiesen.";
         return output;    
     }
-
-    @Override
-    public int urlaubstageLesen(int ID) throws RemoteException {
-        return db.readUrlaubstage(ID);
-    }
-
-    @Override
-    public Mitarbeiter mitarbeiterLesen(int ID) throws RemoteException {
-        return db.readMA(ID);
-    }
-
-    @Override
-    public Mitarbeiter mitarbeiterLesen(String name) throws RemoteException {
-        return db.readMA(name);
-    }
+    
+    // Urlaubsantrag
 
     @Override
     public Urlaubsantrag urlaubsantragLesen(int ID) throws RemoteException {
@@ -66,7 +73,7 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
 
     @Override
-    public ArrayList<Urlaubsantrag> readAllUAsForMA(int MA_ID) throws RemoteException {
+    public ArrayList<Integer> readAllUAsForMA(int MA_ID) throws RemoteException {
         return db.readAllUAsForMA(MA_ID);
     }
 
@@ -92,13 +99,13 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         db.saveUA(ua);
         db.updateMA(MA.getID(),MA.getUrlaubstage());
         String output = "";
-        ArrayList<Urlaubsantrag> UAs = db.readAllUAsForMA(MA.getID());
-        
-        if(UAs.get(0).getVertreter() != null){
-            output = UAs.get(0).toString() + " wurde gestellt und angenommen.";   
+        ArrayList<Integer> UAs = db.readAllUAsForMA(MA.getID());
+        Urlaubsantrag u = this.urlaubsantragLesen(UAs.get(0));
+        if(u.getVertreter() != null){
+            output = u.toString() + " wurde gestellt und angenommen.";   
         }
         else{
-            output = UAs.get(0).toString() + " muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen.";
+            output = u.toString() + " muss entschieden werden, kein Vertreter vorhanden. Angrag mit J annnehmen oder mit N ablehnen.";
         }
         return output;
     }

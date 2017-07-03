@@ -2,10 +2,6 @@ package serverUV;
 
 import java.io.Serializable;
 
-/**
- *
- * @author TKulhavy
- */
 public class Mitarbeiter implements Serializable {
 
     private String Name;

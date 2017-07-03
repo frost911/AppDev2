@@ -11,12 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import serverUV.UV;
-import serverUV.Urlaubsantrag;
 
-/**
- *
- * @author TKulhavy
- */
 public class Client_main {
       
     // Variablen für Farbige Textausgabe
@@ -39,7 +34,7 @@ public class Client_main {
             // Ausgabe "Header"
             System.out.println(ANSI_GREEN + "AppDev2 SS 2017" + ANSI_GREEN);
             System.out.println(ANSI_GREEN + "Dozent: "+ ANSI_GREEN + ANSI_RED +"Herr Barth");
-            System.out.println(ANSI_GREEN + "Gruppe: "+ ANSI_GREEN + ANSI_RED +" Kulhavy, Lemm, Wisskirchen, Seitz" + ANSI_RED);
+            System.out.println(ANSI_GREEN + "Gruppe: "+ ANSI_GREEN + ANSI_RED +" Kulhavy, Lemm, Wißkirchen, Seitz" + ANSI_RED);
             System.out.println(ANSI_GREEN + "Programm:  "+ ANSI_GREEN + ANSI_RED +"Urlaubsvertretung" + ANSI_RED );
             System.out.println();
             System.out.println(ANSI_RED + "<-Beispielhafter Programmablauf->" + ANSI_RED);
@@ -57,16 +52,16 @@ public class Client_main {
             //Programmablauf
             System.out.println(ANSI_GREEN + "Mitarbeiter Seitz hat " + uv.urlaubstageLesen(uv.mitarbeiterLesen("Thomas Seitz").getID()) + " Urlaubstage");
             System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Thomas Seitz"), null, new Date(117, 7, 2), new Date(117, 7, 10)));
-            ArrayList<Urlaubsantrag> UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Thomas Seitz").getID());  
+            ArrayList<Integer> UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Thomas Seitz").getID());  
             
             //Entscheidung 1
             System.out.print(ANSI_YELLOW + "Ihre Eingabe:");
             input = br.readLine();
             if(input.equalsIgnoreCase("J")){
-                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
             }
             else{
-                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0).getID(), false)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0), false)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
             }
             System.out.println(ANSI_GREEN + "Mitarbeiter Seitz hat noch " +uv.mitarbeiterLesen("Thomas Seitz").getUrlaubstage() + " Urlaubstage");
             System.out.println(ANSI_RED + "Mitarbeiter Lemm will ebenfalls Urlaub nehmen.");
@@ -77,15 +72,16 @@ public class Client_main {
             System.out.print(ANSI_YELLOW + "Ihre Eingabe:");
             input = br.readLine();
             if(input.equalsIgnoreCase("J")){
-                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0).getID(), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
             }
             else{
-                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0).getID(), false)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
+                System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0), false)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
             }
             System.out.println(ANSI_GREEN + "Mitarbeiter Lemm hat " + uv.urlaubstageLesen(uv.mitarbeiterLesen("Patrick Lemm").getID()) + " Urlaubstage");
             System.out.println(ANSI_RED + "Da der Urlaub abgelehnt wurde, stellt Mitarbeiter Lemm einen erneuten Antrag.");
             System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Patrick Lemm"), uv.mitarbeiterLesen("Maurice Wisskirchen"), new Date(117, 7, 2), new Date(117, 7, 10)));
             System.out.println(ANSI_GREEN + "Mitarbeiter Lemm hat " + uv.urlaubstageLesen(uv.mitarbeiterLesen("Patrick Lemm").getID()) + " Urlaubstage");
+            
             //Programmablauf Ende
             System.out.println();
             System.out.println(ANSI_RED + "<-Ende Beispielhafter Programmablauf->" + ANSI_RED);

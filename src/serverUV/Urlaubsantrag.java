@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
-/**
- *
- * @author TKulhavy
- */
 public class Urlaubsantrag implements Serializable {
 
     private final int ID;
