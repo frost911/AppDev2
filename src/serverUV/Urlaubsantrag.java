@@ -18,6 +18,9 @@ public class Urlaubsantrag implements Serializable {
         return genehmigt;
     }
 
+    /**
+     * Updates Urlaubstage
+     */
     public void genehmigen() {
         if (this.diffInDays > MA.getUrlaubstage()) {
             throw new IllegalArgumentException("Der eingereichte Urlaub überschreitet die verfügbare Anzahl von Urlaubstagen! (Verfügbar: " + MA.getUrlaubstage() + ", Angefordert: " + this.diffInDays + ")");
@@ -26,19 +29,34 @@ public class Urlaubsantrag implements Serializable {
             MA.setUrlaubstage(MA.getUrlaubstage() - diffInDays);
         }
     }
-
+    
+    /**
+     * genehmigt = false
+     */
     public void ablehnen() {
         this.genehmigt = false;
     }
-
+    
+    /**
+     * 
+     * @return  Date urlaubsende
+     */
     public Date getUrlaubsende() {
         return urlaubsende;
     }
-
+    
+    /**
+     * 
+     * @return Date urlaubsbeginn
+     */
     public Date getUrlaubsbeginn() {
         return urlaubsbeginn;
     }
-
+    
+    /**
+     * 
+     * @return mitarbeiter vertreter
+     */
     public Mitarbeiter getVertreter() {
         return vertreter;
     }
@@ -46,19 +64,35 @@ public class Urlaubsantrag implements Serializable {
     public void setVertreter(Mitarbeiter vertreter) {
         this.vertreter = vertreter;
     }
-
+    
+    /**
+     * 
+     * @return Mitarbeiter
+     */
     public Mitarbeiter getMA() {
         return MA;
     }
-
+    
+    /**
+     * 
+     * @param MA 
+     */
     public void setMA(Mitarbeiter MA) {
         this.MA = MA;
     }
-
+    
+    /**
+     * 
+     * @return int ID
+     */
     public int getID() {
         return ID;
     }
-
+    
+    /**
+     * 
+     * Override toString for Urlaubsantrag 
+     */
     @Override
     public String toString() {
         if(vertreter == null){
@@ -67,7 +101,15 @@ public class Urlaubsantrag implements Serializable {
             return "Urlaubsantrag { " + "ID = " + ID + ", Antragsteller = " + MA.toString() + ", Vertreter = " + vertreter.toString() + ", Urlaubsbeginn = " + urlaubsbeginn + ", Urlaubsende = " + urlaubsende + '}';
         }
     }
-
+    
+    /**
+     * 
+     * @param MA
+     * @param vertreter
+     * @param urlaubsbeginn
+     * @param urlaubsende
+     * @param ID 
+     */   
     public Urlaubsantrag(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende, int ID) {
         this.vertreter = vertreter;
         this.urlaubsbeginn = urlaubsbeginn;
@@ -87,7 +129,7 @@ public class Urlaubsantrag implements Serializable {
         }
         if (vertreter != null && vertreter.equals(MA)) {
             throw new IllegalArgumentException("Ein Mitarbeiter kann sich nicht selbst vertreten!");
-        } else if (vertreter != null) { //todo
+        } else if (vertreter != null) {
             this.genehmigt = true;
             MA.setUrlaubstage(MA.getUrlaubstage() - this.diffInDays);
         }
