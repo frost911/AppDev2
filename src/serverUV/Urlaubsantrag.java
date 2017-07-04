@@ -13,7 +13,10 @@ public class Urlaubsantrag implements Serializable {
     private final Date urlaubsende;
     private int diffInDays;
     private boolean genehmigt;
-
+    /**
+     * 
+     * @return Bool genehmight
+     */
     public boolean isGenehmigt() {
         return genehmigt;
     }
