@@ -20,6 +20,7 @@ public class Urlaubsantrag implements Serializable {
 
     /**
      * Updates Urlaubstage
+     * genehmigt = true
      */
     public void genehmigen() {
         if (this.diffInDays > MA.getUrlaubstage()) {
@@ -38,7 +39,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * @return  Date urlaubsende
      */
     public Date getUrlaubsende() {
@@ -46,7 +46,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * @return Date urlaubsbeginn
      */
     public Date getUrlaubsbeginn() {
@@ -54,7 +53,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * @return mitarbeiter vertreter
      */
     public Mitarbeiter getVertreter() {
@@ -66,7 +64,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * @return Mitarbeiter
      */
     public Mitarbeiter getMA() {
@@ -74,7 +71,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * @param MA 
      */
     public void setMA(Mitarbeiter MA) {
@@ -82,7 +78,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * @return int ID
      */
     public int getID() {
@@ -90,7 +85,6 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
      * Override toString for Urlaubsantrag 
      */
     @Override
@@ -103,7 +97,7 @@ public class Urlaubsantrag implements Serializable {
     }
     
     /**
-     * 
+     * Constructor
      * @param MA
      * @param vertreter
      * @param urlaubsbeginn

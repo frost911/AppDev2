@@ -5,6 +5,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
 import java.util.ArrayList;
 
+/**
+ * Creates DB Object 
+ * Implements Interface UV
+ * extends UnicastRemoteObject
+ */
 public class UVImpl extends UnicastRemoteObject implements UV {
 
     DBConnect db;
@@ -12,7 +17,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     // Mitarbeiter
     
     /**
-     * 
      * @param Name
      * @param abteilung
      * @param urlaubstage
@@ -29,7 +33,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param ID
      * @return int Urlaubstage
      * @throws RemoteException 
@@ -40,7 +43,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param ID
      * @return Mitarbeiter
      * @throws RemoteException 
@@ -51,7 +53,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param name
      * @return Mitarbeiter
      * @throws RemoteException 
@@ -64,9 +65,8 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     // Abteilung
     
     /**
-     * 
      * @param Name
-     * @return 
+     * @return Abteilung
      */
     @Override
     public Abteilung abteilungLesen(String Name) {
@@ -74,7 +74,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param abteilungsleiter
      * @param Name
      * @param ID 
@@ -87,7 +86,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param Name
      * @return String output
      */
@@ -100,7 +98,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param AB_ID
      * @param MA_ID
      * @return String output
@@ -115,7 +112,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     // Urlaubsantrag
     
     /**
-     * 
      * @param ID
      * @return Urlaubsantrag
      * @throws RemoteException 
@@ -125,7 +121,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
         return db.readUA(ID);
     }
     /**
-     * 
      * @param MA_ID
      * @return ArrayList<Integer>
      * @throws RemoteException 
@@ -136,7 +131,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param ID
      * @param genehmigt
      * @return String ua.ToString()
@@ -159,7 +153,6 @@ public class UVImpl extends UnicastRemoteObject implements UV {
     }
     
     /**
-     * 
      * @param MA
      * @param vertreter
      * @param urlaubsbeginn

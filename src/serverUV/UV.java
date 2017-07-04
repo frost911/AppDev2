@@ -20,7 +20,7 @@ public interface UV extends Remote {
 
     public abstract Mitarbeiter mitarbeiterLesen(String name) throws RemoteException;
     
-     public abstract int urlaubstageLesen(int ID) throws RemoteException;
+    public abstract int urlaubstageLesen(int ID) throws RemoteException;
     
     // Abteilung
     
