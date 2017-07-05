@@ -40,7 +40,7 @@ public class Client_main {
             System.out.println(ANSI_RED + "<-Beispielhafter Programmablauf->" + ANSI_RED);
             System.out.println();
 
-            // Objekte erstellen
+            // Objekte in Datenbank schreiben
             System.out.println(ANSI_GREEN + uv.abteilungAnlegen("Anwendungsentwicklung"));
             System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Thomas Seitz", uv.abteilungLesen("Anwendungsentwicklung"), 30));
             System.out.println(ANSI_GREEN + uv.mitarbeiterAnlegen("Maurice Wisskirchen", uv.abteilungLesen("Anwendungsentwicklung"), 30));
@@ -52,11 +52,11 @@ public class Client_main {
             //Programmablauf
             System.out.println(ANSI_GREEN + "Mitarbeiter Seitz hat " + uv.urlaubstageLesen(uv.mitarbeiterLesen("Thomas Seitz").getID()) + " Urlaubstage");
             System.out.println(ANSI_GREEN + uv.urlaubsantragStellen(uv.mitarbeiterLesen("Thomas Seitz"), null, new Date(117, 7, 2), new Date(117, 7, 10)));
-            ArrayList<Integer> UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Thomas Seitz").getID());
 
             //Entscheidung 1
             System.out.print(ANSI_YELLOW + "Ihre Eingabe:");
             input = br.readLine();
+            ArrayList<Integer> UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Thomas Seitz").getID());
             if (input.equalsIgnoreCase("J")) {
                 System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
             } else {
@@ -70,6 +70,7 @@ public class Client_main {
             //Entscheidung 2
             System.out.print(ANSI_YELLOW + "Ihre Eingabe:");
             input = br.readLine();
+            UAs = uv.readAllUAsForMA(uv.mitarbeiterLesen("Patrick Lemm").getID());
             if (input.equalsIgnoreCase("J")) {
                 System.out.println(ANSI_GREEN + uv.urlaubsantragEntscheiden(UAs.get(0), true)); // get(0) gibt immer den zuletzt eingereichten Urlaubsantrag für den Mitarbeiter
             } else {

@@ -169,7 +169,7 @@ public class UVImpl extends UnicastRemoteObject implements UV {
             output = u.toString() + " wurde gestellt und angenommen.";
             db.updateMA(MA.getID(), MA.getUrlaubstage());
         } else {
-            output = u.toString() + " muss entschieden werden, kein Vertreter vorhanden. Antrag mit J annnehmen oder mit N ablehnen.";
+            output = u.toString() + " muss entschieden werden, kein Vertreter vorhanden. Antrag mit J annehmen oder mit N ablehnen.";
         }
         return output;
     }
