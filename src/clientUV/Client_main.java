@@ -85,6 +85,10 @@ public class Client_main {
             //Programmablauf Ende
             System.out.println();
             System.out.println(ANSI_RED + "<-Ende Beispielhafter Programmablauf->" + ANSI_RED);
+            
+            //close Buffered Reader
+            br.close();
+            
             //exception handling
         } catch (RemoteException ex) {
             System.out.println("RMI Fehler: " + ex.getMessage());
