@@ -299,7 +299,7 @@ public class DBConnect {
     }
 
     /**
-     * Connects to DB
+     * Constructor
      */
     public DBConnect() {
         try {
