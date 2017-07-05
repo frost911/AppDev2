@@ -8,37 +8,37 @@ public class Mitarbeiter implements Serializable {
     private final int ID;
     private Abteilung abteilung;
     private int urlaubstage;
-    
+
     /**
      * @return Abteilung
      */
     public Abteilung getAbteilung() {
         return abteilung;
     }
-    
+
     /**
-     * @param abteilung 
+     * @param abteilung
      */
     public void setAbteilung(Abteilung abteilung) {
         this.abteilung = abteilung;
     }
-    
+
     /**
      * @return ID
      */
     public int getID() {
         return ID;
     }
-    
+
     /**
-     * @return 
+     * @return
      */
     public int getUrlaubstage() {
         return urlaubstage;
     }
-    
+
     /**
-     * @param urlaubstage 
+     * @param urlaubstage
      */
     public void setUrlaubstage(int urlaubstage) {
         this.urlaubstage = urlaubstage;
@@ -50,14 +50,14 @@ public class Mitarbeiter implements Serializable {
     public String getName() {
         return Name;
     }
-    
+
     /**
-     * @param Name 
+     * @param Name
      */
     public void setName(String Name) {
         this.Name = Name;
     }
-    
+
     /**
      * @return Mitarbeiter to String
      */
@@ -65,13 +65,14 @@ public class Mitarbeiter implements Serializable {
     public String toString() {
         return "Mitarbeiter { " + "Name = " + Name + ", ID = " + ID + ", Urlaubstage = " + urlaubstage + '}';
     }
-    
+
     /**
      * Constructor
+     *
      * @param Name
      * @param abteilung
      * @param urlaubstage
-     * @param ID 
+     * @param ID
      */
     public Mitarbeiter(String Name, Abteilung abteilung, int urlaubstage, int ID) {
         this.Name = Name;

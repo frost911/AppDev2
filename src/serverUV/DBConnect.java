@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Gets Called and instanced by UVImpl Handles all Database Querries
+ * Gets Called and instanced by UVImpl 
+ * Handles all Database Queries
  */
 public class DBConnect {
 

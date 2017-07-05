@@ -13,8 +13,9 @@ public class Urlaubsantrag implements Serializable {
     private final Date urlaubsende;
     private int diffInDays;
     private boolean genehmigt;
+
     /**
-     * 
+     *
      * @return Bool genehmight
      */
     public boolean isGenehmigt() {
@@ -22,8 +23,7 @@ public class Urlaubsantrag implements Serializable {
     }
 
     /**
-     * Updates Urlaubstage
-     * genehmigt = true
+     * Updates Urlaubstage genehmigt = true
      */
     public void genehmigen() {
         if (this.diffInDays > MA.getUrlaubstage()) {
@@ -33,28 +33,28 @@ public class Urlaubsantrag implements Serializable {
             MA.setUrlaubstage(MA.getUrlaubstage() - diffInDays);
         }
     }
-    
+
     /**
      * genehmigt = false
      */
     public void ablehnen() {
         this.genehmigt = false;
     }
-    
+
     /**
-     * @return  Date urlaubsende
+     * @return Date urlaubsende
      */
     public Date getUrlaubsende() {
         return urlaubsende;
     }
-    
+
     /**
      * @return Date urlaubsbeginn
      */
     public Date getUrlaubsbeginn() {
         return urlaubsbeginn;
     }
-    
+
     /**
      * @return mitarbeiter vertreter
      */
@@ -65,48 +65,49 @@ public class Urlaubsantrag implements Serializable {
     public void setVertreter(Mitarbeiter vertreter) {
         this.vertreter = vertreter;
     }
-    
+
     /**
      * @return Mitarbeiter
      */
     public Mitarbeiter getMA() {
         return MA;
     }
-    
+
     /**
-     * @param MA 
+     * @param MA
      */
     public void setMA(Mitarbeiter MA) {
         this.MA = MA;
     }
-    
+
     /**
      * @return int ID
      */
     public int getID() {
         return ID;
     }
-    
+
     /**
-     * Override toString for Urlaubsantrag 
+     * Override toString for Urlaubsantrag
      */
     @Override
     public String toString() {
-        if(vertreter == null){
+        if (vertreter == null) {
             return "Urlaubsantrag { " + "ID = " + ID + ", Antragsteller = " + MA.toString() + ", Urlaubsbeginn = " + urlaubsbeginn + ", Urlaubsende = " + urlaubsende + '}';
-        }else{
+        } else {
             return "Urlaubsantrag { " + "ID = " + ID + ", Antragsteller = " + MA.toString() + ", Vertreter = " + vertreter.toString() + ", Urlaubsbeginn = " + urlaubsbeginn + ", Urlaubsende = " + urlaubsende + '}';
         }
     }
-    
+
     /**
      * Constructor
+     *
      * @param MA
      * @param vertreter
      * @param urlaubsbeginn
      * @param urlaubsende
-     * @param ID 
-     */   
+     * @param ID
+     */
     public Urlaubsantrag(Mitarbeiter MA, Mitarbeiter vertreter, Date urlaubsbeginn, Date urlaubsende, int ID) {
         this.vertreter = vertreter;
         this.urlaubsbeginn = urlaubsbeginn;

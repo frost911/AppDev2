@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class Server_main {
+
     /**
      * @param args the command line arguments
      */
