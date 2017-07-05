@@ -8,8 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Gets Called and instanced by UVImpl
- * Handles all Database Querries
+ * Gets Called and instanced by UVImpl Handles all Database Querries
  */
 public class DBConnect {
 
@@ -17,10 +16,8 @@ public class DBConnect {
     private String user = "root";
     private String pw = "";
     private Connection conn;
-    
-    
+
     // Mitarbeiter
-    
     /**
      * @param ID
      * @return Mitarbeiter
@@ -41,10 +38,10 @@ public class DBConnect {
         }
         return ma;
     }
-    
+
     /**
      * @param name
-     * @return  Mitarbeiter
+     * @return Mitarbeiter
      */
     public Mitarbeiter readMA(String name) {
         Mitarbeiter ma = null;
@@ -62,10 +59,10 @@ public class DBConnect {
         }
         return ma;
     }
-    
+
     /**
      * @param ID
-     * @param urlaubstage 
+     * @param urlaubstage
      */
     public void updateMA(int ID, int urlaubstage) {
         try {
@@ -78,7 +75,7 @@ public class DBConnect {
             System.out.println("Fehler beim aktualisieren eines Mitarbeiters: (ID " + ID + "): " + ex.getMessage());
         }
     }
-    
+
     /**
      * @param ID
      * @return int Urlaubstage
@@ -99,9 +96,9 @@ public class DBConnect {
         }
         return urlaubstage;
     }
-    
+
     /**
-     * @param ma 
+     * @param ma
      */
     public void saveMA(Mitarbeiter ma) {
         try {
@@ -116,9 +113,8 @@ public class DBConnect {
             System.out.println("Fehler beim anlegen eines Mitarbeiters: (ID " + ma.toString() + "): " + ex.getMessage());
         }
     }
-    
+
     // Abteilung
-    
     /**
      * @param abteilungsname
      * @return Abteilung
@@ -131,12 +127,11 @@ public class DBConnect {
             ps.execute();
             ResultSet res = ps.getResultSet();
             if (res.next()) {
-                if (res.getInt("abteilungsleiter") == 0){
-                    dpt = new Abteilung(res.getString("name"), res.getInt("ID"));   
-                }
-                else{
+                if (res.getInt("abteilungsleiter") == 0) {
+                    dpt = new Abteilung(res.getString("name"), res.getInt("ID"));
+                } else {
                     Mitarbeiter ma = this.readMA(res.getInt("abteilungsleiter"));
-                    dpt = new Abteilung(ma, res.getString("name"), res.getInt("ID"));              
+                    dpt = new Abteilung(ma, res.getString("name"), res.getInt("ID"));
                 }
             }
             ps.close();
@@ -145,7 +140,7 @@ public class DBConnect {
         }
         return dpt;
     }
-    
+
     /**
      * @param ID
      * @return Abteilung
@@ -157,8 +152,8 @@ public class DBConnect {
             ps.setInt(1, ID);
             ps.execute();
             ResultSet res = ps.getResultSet();
-            if (res.next()) {               
-                    dpt = new Abteilung(res.getString("name"), res.getInt("ID"));   
+            if (res.next()) {
+                dpt = new Abteilung(res.getString("name"), res.getInt("ID"));
             }
             ps.close();
         } catch (SQLException ex) {
@@ -166,10 +161,10 @@ public class DBConnect {
         }
         return dpt;
     }
-    
+
     /**
      * @param AB_ID
-     * @param MA_ID 
+     * @param MA_ID
      */
     public void setAL(int AB_ID, int MA_ID) {
         try {
@@ -182,9 +177,9 @@ public class DBConnect {
             System.out.println("Fehler beim setzen des Abteilungsleiters: (Abteilungsleiter ID " + MA_ID + ", Abteilungs ID " + AB_ID + "): " + ex.getMessage());
         }
     }
-        
+
     /**
-     * @param ab 
+     * @param ab
      */
     public void saveDpt(Abteilung ab) {
         try {
@@ -201,11 +196,10 @@ public class DBConnect {
             System.out.println("Fehler beim anlegen einer Abteilung: (Abteilung " + ab.toString() + "): " + ex.getMessage());
         }
     }
-     
+
     // Urlaubsantrag
-    
     /**
-     * @param antrag 
+     * @param antrag
      */
     public void saveUA(Urlaubsantrag antrag) {
         try {
@@ -227,10 +221,10 @@ public class DBConnect {
             System.out.println("Fehler beim anlegen eines Urlaubsantrags: (" + antrag.toString() + "): " + ex.getMessage());
         }
     }
-    
+
     /**
      * @param ID
-     * @param genehmigt 
+     * @param genehmigt
      */
     public void updateUA(int ID, boolean genehmigt) {
         try {
@@ -243,7 +237,7 @@ public class DBConnect {
             System.out.println("Fehler beim entscheiden über einen Urlaubsantrag: (ID " + ID + "): " + ex.getMessage());
         }
     }
-    
+
     /**
      * @param ID
      * @return Urlaubsantrag
@@ -268,13 +262,12 @@ public class DBConnect {
         }
         return ua;
     }
-    
+
     /**
      * @param MA_ID
      * @return ArrayList with UA IDs
      */
     public ArrayList<Integer> readAllUAsForMA(int MA_ID) {
-        Mitarbeiter v = null;
         ArrayList<Integer> UAs = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM `urlaubsantrag` WHERE `mitarbeiter_id` = ? ORDER BY `id` DESC");
@@ -293,7 +286,6 @@ public class DBConnect {
     }
 
     // General
-    
     /**
      * Closes DB Connection
      */
@@ -304,7 +296,7 @@ public class DBConnect {
             System.out.println("Fehler beim schließen der Verbindung: " + ex.getMessage());
         }
     }
-    
+
     /**
      * Connects to DB
      */
